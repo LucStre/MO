@@ -1,0 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model adresa {
+  id         Int      @id @default(autoincrement())
+  ulica      String   @db.VarChar
+  broj       String   @db.VarChar
+  mjesto     String   @db.VarChar
+  postbr     String   @db.VarChar
+  idkorisnik Int
+  korisnik   korisnik @relation(fields: [idkorisnik], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  oglas      oglas[]
+}
+
+model kategorija {
+  id               Int          @id @default(autoincrement())
+  ime              String       @db.VarChar
+  kratica          String       @unique @db.VarChar
+  nadkategorija_id Int?
+  kategorija       kategorija?  @relation("kategorijaTokategorija_nadkategorija_id", fields: [nadkategorija_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  other_kategorija kategorija[] @relation("kategorijaTokategorija_nadkategorija_id")
+  oglas            oglas[]
+}
+
+model korisnik {
+  id           Int          @id @default(autoincrement())
+  ime          String       @db.VarChar
+  prezime      String       @db.VarChar
+  brojtelefona String       @db.VarChar
+  email        String       @db.VarChar
+  adresa       adresa[]
+  kupovina     kupovina[]   @ignore
+  novcanik     novcanik[]   @ignore
+  oglas        oglas[]
+  spremljeno   spremljeno[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model kupovina {
+  datum      DateTime @db.Date
+  kodpopust  String?  @db.VarChar
+  idoglas    Int
+  idkorisnik Int
+  id         Int      @default(autoincrement())
+  korisnik   korisnik @relation(fields: [idkorisnik], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  oglas      oglas    @relation(fields: [idoglas], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model novcanik {
+  stanje     Int
+  idkorisnik Int
+  korisnik   korisnik @relation(fields: [idkorisnik], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "novčanik_idkorisnik_fkey")
+
+  @@ignore
+}
+
+model oglas {
+  id           Int          @id @default(autoincrement())
+  naziv        String       @db.VarChar
+  opis         String       @db.VarChar
+  cijena       Int
+  dostava      Boolean
+  idkategorija Int
+  idadresa     Int
+  idkorisnik   Int
+  idstatus     Int
+  adresa       adresa       @relation(fields: [idadresa], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  kategorija   kategorija   @relation(fields: [idkategorija], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  korisnik     korisnik     @relation(fields: [idkorisnik], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  status       status       @relation(fields: [idstatus], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  kupovina     kupovina[]   @ignore
+  slika        slika[]
+  spremljeno   spremljeno[]
+}
+
+model slika {
+  id         Int    @id @default(autoincrement())
+  vrijednost String @db.VarChar
+  naziv      String @db.VarChar
+  idoglas    Int
+  oglas      oglas  @relation(fields: [idoglas], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model spremljeno {
+  idkorisnik Int
+  idoglas    Int
+  korisnik   korisnik @relation(fields: [idkorisnik], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  oglas      oglas    @relation(fields: [idoglas], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([idkorisnik, idoglas])
+}
+
+model status {
+  id    Int     @id @default(autoincrement())
+  naziv String  @db.VarChar
+  oglas oglas[]
+}
