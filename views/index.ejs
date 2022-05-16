@@ -8,15 +8,11 @@
 
   <body class="min-h-screen flex flex-col">
     <%- include('header'); -%>
-
+    
     <main class="container mx-auto px-4 flex-1">
-        <h2 class="text-3xl font-bold underline text-center"><%= message; %></h1>
-
-        <ul class="list-none flex flex-col gap-4 items-center">
-            <% categories.forEach(function(category){ %>
-                <li class="hover:underline"><a href="/">Početna</a></li>
-            <% }); %>
-        </ul>
+      <h2 class="text-3xl font-bold underline text-center"><%= message; %></h1>
+      
+      <%- include('categories-list', { categories }); -%>
     </main>
   </body>
 </html>

@@ -1,0 +1,10 @@
+<ul class="bg-emerald-300/50">
+  <% categories.forEach(function(category){ %>
+    <li class="px-4 my-2">
+      <a class="hover:underline" href="/category/<%= category.kratica %>"><%= category.ime %></a>
+      <% if (category.podkategorije.length > 0) { %>
+        <%- include('categories-list', { categories: category.podkategorije }); -%>
+      <% } %>
+    </li>
+  <% }); %>
+</ul>
