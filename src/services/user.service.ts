@@ -52,5 +52,6 @@ export class UserService {
     return this.prisma.korisnik.delete({
       where,
     });
+    //obrisati i sve adrese korisnika, njegov novčanik, sve kupovine, sve oglase, sve spremljene oglase
   }
 }
