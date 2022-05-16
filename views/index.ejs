@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Mali oglasnik</title>
-</head>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
 
-<body>
-    {{ message }}
-</body>
+  <body class="min-h-screen flex flex-col">
+    <%- include('header'); -%>
 
+    <main class="container mx-auto px-4 flex-1">
+        <h2 class="text-3xl font-bold underline text-center"><%= message; %></h1>
+
+        <ul class="list-none flex flex-col gap-4 items-center">
+            <% categories.forEach(function(category){ %>
+                <li class="hover:underline"><a href="/">Početna</a></li>
+            <% }); %>
+        </ul>
+    </main>
+  </body>
 </html>

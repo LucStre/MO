@@ -1,18 +1,29 @@
 import {
-  Get,
-  Controller,
-  Param,
-  Delete,
-  Put,
-  Post,
   Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Render,
 } from '@nestjs/common';
-import { UserService } from './services/user.service';
 import { korisnik as UserModel } from '@prisma/client';
+import { UserService } from './services/user.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly userService: UserService) {}
+
+  @Get('/')
+  @Render('index.ejs')
+  root() {
+    const categories = this.userService.users({});
+
+    return {
+      message: 'Hello world!',
+    };
+  }
 
   @Get('user/:id')
   async getUserById(@Param('id') id: string): Promise<UserModel> {
