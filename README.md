@@ -32,6 +32,12 @@
 $ npm install
 ```
 
+Setup the prisma client as well, first set the `DATABASE_URL` in the _.env_ file and then:
+
+```bash
+$ npx prisma generate
+```
+
 ## Running the app
 
 ```bash
