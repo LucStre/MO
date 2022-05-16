@@ -7,24 +7,24 @@ import {
   Delete,
   Put,
 } from '@nestjs/common';
-import { UserService } from '../services/user.service';
+import { UserService } from './user.service';
 import { korisnik as UserModel } from '@prisma/client';
 
-@Controller('users')
+@Controller('api/users')
 export class UsersController {
   constructor(private readonly userService: UserService) {}
 
-  @Get('user/:id')
+  @Get(':id')
   async getUserById(@Param('id') id: string): Promise<UserModel> {
     return this.userService.user({ id: Number(id) });
   }
 
-  @Get('users')
+  @Get()
   async getUsers(): Promise<UserModel[]> {
     return this.userService.users({});
   }
 
-  @Post('user')
+  @Post()
   async createUser(
     @Body()
     userData: {
@@ -43,7 +43,7 @@ export class UsersController {
     });
   }
 
-  @Put('user/:id')
+  @Put(':id')
   async updateUser(
     @Param('id') id: string,
     @Body()
@@ -65,7 +65,7 @@ export class UsersController {
     });
   }
 
-  @Delete('user/:id')
+  @Delete(':id')
   async deleteUser(@Param('id') id: string): Promise<UserModel> {
     return this.userService.deleteUser({ id: Number(id) });
   }
