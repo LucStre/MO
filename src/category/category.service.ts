@@ -8,9 +8,11 @@ export class CategoryService {
 
   async category(
     kategorijaWhereUniqueInput: Prisma.kategorijaWhereUniqueInput,
+    include?: Prisma.kategorijaInclude,
   ): Promise<kategorija | null> {
     return this.prisma.kategorija.findUnique({
       where: kategorijaWhereUniqueInput,
+      include,
     });
   }
 

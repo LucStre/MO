@@ -122,13 +122,20 @@ export class WebController {
   @Get('/category/:kratica')
   @Render('edit-category.ejs')
   async editCategory(@Param('kratica') kratica: string) {
-    const category = await this.categoryService.category({ kratica });
+    const category = await this.categoryService.category(
+      { kratica },
+      { other_kategorija: true },
+    );
     const categories = await this.categoryService.categories({
       where: { NOT: { id: category.id } },
     });
 
     const ads = await this.adService.ads({
-      where: { idkategorija: category.id },
+      where: {
+        OR: [category, ...category['other_kategorija']].map((cat) => ({
+          idkategorija: cat.id,
+        })),
+      },
       include: { slika: true, status: true },
     });
 

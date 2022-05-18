@@ -43,7 +43,7 @@
     >
       <option value="">Bez nadkategorije</option>
       <% categories.forEach(function(category){ %>
-      <option value="<%= category.id %>" <% if (nadkategorija_id == category.id) { %>selected<% } %>>
+      <option value="<%= category.id %>" <% if (locals.nadkategorija_id == category.id) { %>selected<% } %>>
         <%= category.ime %>
       </option>
       <% }) %>
