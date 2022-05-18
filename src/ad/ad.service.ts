@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from './prisma.service';
+import { PrismaService } from '../prisma.service';
 import { oglas, Prisma } from '@prisma/client';
 
 @Injectable()
@@ -31,7 +31,7 @@ export class AdService {
     });
   }
 
-  async createAd(data: Prisma.oglasCreateInput): Promise<oglas> {
+  async createAd(data: Prisma.oglasUncheckedCreateInput): Promise<oglas> {
     return this.prisma.oglas.create({
       data,
     });
@@ -39,7 +39,7 @@ export class AdService {
 
   async updateAd(params: {
     where: Prisma.oglasWhereUniqueInput;
-    data: Prisma.oglasUpdateInput;
+    data: Prisma.oglasUncheckedUpdateInput;
   }): Promise<oglas> {
     const { where, data } = params;
     return this.prisma.oglas.update({

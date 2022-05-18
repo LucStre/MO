@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from './prisma.service';
+import { PrismaService } from '../prisma.service';
 import { slika, Prisma } from '@prisma/client';
 
 @Injectable()
@@ -31,7 +31,7 @@ export class PictureService {
     });
   }
 
-  async createPicture(data: Prisma.slikaCreateInput): Promise<slika> {
+  async createPicture(data: Prisma.slikaUncheckedCreateInput): Promise<slika> {
     return this.prisma.slika.create({
       data,
     });
@@ -39,7 +39,7 @@ export class PictureService {
 
   async updatePicture(params: {
     where: Prisma.slikaWhereUniqueInput;
-    data: Prisma.slikaUpdateInput;
+    data: Prisma.slikaUncheckedUpdateInput;
   }): Promise<slika> {
     const { where, data } = params;
     return this.prisma.slika.update({
