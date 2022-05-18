@@ -1,0 +1,103 @@
+<form action="/ad" method="post">
+  <% if (locals.id) { %>
+  <input type="text" name="id" id="id" hidden value="<%= id %>" />
+  <% } %>
+
+  <% if (locals.idkategorija) { %>
+  <input type="text" name="idkategorija" id="idkategorija" hidden value="<%= idkategorija %>" />
+  <% } %>
+
+  <div>
+    <label for="naziv" class="block text-sm font-medium text-gray-700">
+      Naziv
+    </label>
+    <input
+      type="text"
+      name="naziv"
+      id="naziv"
+      class="mt-1 rounded shadow block w-full px-3"
+      value="<% if (locals.naziv) { %><%= naziv %><% } %>"
+    />
+  </div>
+
+  <div class="mt-4">
+    <label for="opis" class="block text-sm font-medium text-gray-700">
+      Opis
+    </label>
+    <textarea
+      type="text"
+      name="opis"
+      id="opis"
+      class="mt-1 rounded shadow block w-full px-3"
+    ><% if (locals.opis) { %><%= opis %><% } %></textarea>
+  </div>
+
+
+  <div class="mt-4">
+    <label for="cijena" class="block text-sm font-medium text-gray-700">
+      Cijena
+    </label>
+    <input
+      type="number"
+      name="cijena"
+      id="cijena"
+      class="mt-1 rounded shadow block w-full px-3"
+      value="<% if (locals.cijena) { %><%= cijena %><% } %>"
+    />
+  </div>
+
+  <div class="mt-4">
+    <label
+      for="dostava"
+      class="block text-sm font-medium text-gray-700"
+    >
+      Dostava
+    </label>
+    <select
+      name="dostava"
+      id="dostava"
+      class="mt-1 rounded shadow block w-full px-3"
+    >
+      <option value="" hidden disabled selected>Odaberi</option>
+      <option value="1" <% if (locals.dostava) { %>selected<% } %>>S dostavom</option>
+      <option value="0" <% if (typeof locals.dostava !== "undefined" && !locals.dostava) { %>selected<% } %>>Bez dostave</option>
+    </select>
+  </div>
+
+  <div class="mt-4">
+    <label
+      for="idstatus"
+      class="block text-sm font-medium text-gray-700"
+    >
+      Status
+    </label>
+    <select
+      name="idstatus"
+      id="idstatus"
+      class="mt-1 rounded shadow block w-full px-3"
+    >
+      <option value="" hidden disabled selected>Odaberi status</option>
+      <% statuses.forEach(function(status){ %>
+      <option value="<%= status.id %>" <% if (locals.status?.id == status.id) { %>selected<% } %>>
+        <%= status.naziv %>
+      </option>
+      <% }) %>
+    </select>
+  </div>
+
+  <div class="flex justify-center mt-4 gap-4">
+    <a
+      href="."
+      class="inline-flex justify-center rounded border border-emerald-700 shadow p-4 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-700/20"
+    >
+      Odustani
+    </a>
+
+    <button
+      type="submit"
+      class="inline-flex justify-center rounded border border-transparent shadow p-4 py-2 bg-emerald-700 text-sm font-medium text-white hover:bg-emerald-900"
+    >
+      <% if (locals.id) { %> Uredi <% } else { %> Dodaj <% } %>
+    </button>
+  </div>
+</form>

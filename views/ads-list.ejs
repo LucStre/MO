@@ -1,0 +1,28 @@
+<% ads.forEach(function(ad){ %>
+<div class="rounded p-4 shadow bg-emerald-300 h-96 flex flex-col gap-2">
+  <img class="h-40 object-contain w-full block shrink-0" src="<%=
+  ad.slika[0]?.vrijednost || "/placeholder-image.jpeg" %>" />
+  <h3 class="text-xl truncate shrink-0"><%= ad.naziv %></h3>
+  <div class="shrink-0 flex gap-1">
+    <p class=""><%= ad.cijena %> kn</p>
+    <span>|</span>
+    <p class=""><%= ad.dostava ? "Dostava" : "Bez dostave" %></p>
+    <span>|</span>
+    <p class=""><%= ad.status.naziv %></p>
+  </div>
+  <p class="overflow-auto flex-1"><%= ad.opis %></p>
+  <div class="shrink-0 flex item-center justify-around">
+    <a
+      href="<%= ad.id %>"
+      class="inline-flex justify-center rounded border border-transparent shadow p-3 py-1 bg-emerald-700 text-sm font-medium text-white hover:bg-emerald-900"
+    >
+      Uredi
+    </a>
+    <!-- <button
+      class="inline-flex justify-center rounded border border-transparent shadow p-3 py-1 bg-emerald-700 text-sm font-medium text-white hover:bg-emerald-900"
+    >
+      Izbriši
+    </button> -->
+  </div>
+</div>
+<% }); %>

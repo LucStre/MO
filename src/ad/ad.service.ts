@@ -8,9 +8,11 @@ export class AdService {
 
   async ad(
     oglasWhereUniqueInput: Prisma.oglasWhereUniqueInput,
+    include?: Prisma.oglasInclude,
   ): Promise<oglas | null> {
     return this.prisma.oglas.findUnique({
       where: oglasWhereUniqueInput,
+      include,
     });
   }
 
@@ -20,14 +22,16 @@ export class AdService {
     cursor?: Prisma.oglasWhereUniqueInput;
     where?: Prisma.oglasWhereInput;
     orderBy?: Prisma.oglasOrderByWithRelationInput;
+    include?: Prisma.oglasInclude;
   }): Promise<oglas[]> {
-    const { skip, take, cursor, where, orderBy } = params;
+    const { skip, take, cursor, where, orderBy, include } = params;
     return this.prisma.oglas.findMany({
       skip,
       take,
       cursor,
       where,
       orderBy,
+      include,
     });
   }
 

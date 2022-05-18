@@ -8,14 +8,12 @@
 
   <body class="min-h-screen flex flex-col">
     <%- include('header'); -%>
-    
+
     <main class="container mx-auto px-4 flex-1">
-      <h2 class="text-3xl font-bold underline text-center">
-        Uredi Status
-      </h1>
+      <h2 class="text-3xl font-bold underline text-center">Nova Kategorija</h2>
 
       <div class="rounded my-4 px-6 py-4 bg-emerald-300 drop-shadow">
-        <%- include('status-form', { id, naziv }); -%>
+        <%- include('category-form'); -%>
       </div>
     </main>
   </body>

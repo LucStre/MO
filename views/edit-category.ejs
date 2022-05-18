@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Mali oglasnik</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="min-h-screen flex flex-col">
+    <%- include('header'); -%>
+
+    <main class="container mx-auto px-4 flex-1 pb-4">
+      <h2 class="text-3xl font-bold underline text-center">Uredi kategoriju</h2>
+
+      <div class="rounded my-4 px-6 py-4 bg-emerald-300 drop-shadow">
+        <%- include('category-form', { ...category, categories }) -%>
+      </div>
+
+      <hr />
+
+      <h3 class="text-3xl font-bold underline text-center my-4">Oglasi</h3>
+
+      <div class="my-4">
+        <a class="hover:underline" href="new">Dodaj novi oglas</a>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4">
+        <%- include('ads-list', { ads }); -%>
+      </div>
+    </main>
+  </body>
+</html>

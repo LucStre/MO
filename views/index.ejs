@@ -8,12 +8,12 @@
 
   <body class="min-h-screen flex flex-col">
     <%- include('header'); -%>
-    
+
     <main class="container mx-auto px-4 flex-1">
-      <h2 class="text-3xl font-bold underline text-center">
-        Popis kategorija
-      </h1>
-      
+      <h2 class="text-3xl font-bold underline text-center">Popis kategorija</h2>
+
+      <a class="hover:underline" href="/category/new">Dodaj novu kategoriju</a>
+
       <%- include('categories-list', { categories }); -%>
     </main>
   </body>

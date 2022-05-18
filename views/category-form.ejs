@@ -1,0 +1,68 @@
+<form action="/category" method="post">
+  <% if (locals.id) { %>
+  <input type="text" name="id" id="id" hidden value="<%= id %>" />
+  <% } %>
+
+  <div>
+    <label for="ime" class="block text-sm font-medium text-gray-700">
+      Ime
+    </label>
+    <input
+      type="text"
+      name="ime"
+      id="ime"
+      class="mt-1 rounded shadow block w-full px-3"
+      value="<% if (locals.ime) { %><%= ime %><% } %>"
+    />
+  </div>
+
+  <div class="mt-4">
+    <label for="kratica" class="block text-sm font-medium text-gray-700">
+      Kratica
+    </label>
+    <input
+      type="text"
+      name="kratica"
+      id="kratica"
+      class="mt-1 rounded shadow block w-full px-3"
+      value="<% if (locals.kratica) { %><%= kratica %><% } %>"
+    />
+  </div>
+
+  <div class="mt-4">
+    <label
+      for="nadkategorija_id"
+      class="block text-sm font-medium text-gray-700"
+    >
+      Nadkategorija
+    </label>
+    <select
+      name="nadkategorija_id"
+      id="nadkategorija_id"
+      class="mt-1 rounded shadow block w-full px-3"
+    >
+      <option value="">Bez nadkategorije</option>
+      <% categories.forEach(function(category){ %>
+      <option value="<%= category.id %>" <% if (nadkategorija_id == category.id) { %>selected<% } %>>
+        <%= category.ime %>
+      </option>
+      <% }) %>
+    </select>
+  </div>
+
+  <div class="flex justify-center mt-4 gap-4">
+    <a
+      href=".."
+      class="inline-flex justify-center rounded border border-emerald-700 shadow p-4 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-700/20"
+    >
+      Odustani
+    </a>
+
+    <button
+      type="submit"
+      class="inline-flex justify-center rounded border border-transparent shadow p-4 py-2 bg-emerald-700 text-sm font-medium text-white hover:bg-emerald-900"
+    >
+      <% if (locals.id) { %> Uredi <% } else { %> Dodaj <% } %>
+    </button>
+  </div>
+</form>
