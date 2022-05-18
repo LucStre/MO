@@ -14,7 +14,7 @@ model adresa {
   mjesto     String   @db.VarChar
   postbr     String   @db.VarChar
   idkorisnik Int
-  korisnik   korisnik @relation(fields: [idkorisnik], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  korisnik   korisnik @relation(fields: [idkorisnik], references: [id], onDelete: Cascade, onUpdate: Cascade)
   oglas      oglas[]
 }
 
@@ -23,7 +23,7 @@ model kategorija {
   ime              String       @db.VarChar
   kratica          String       @unique @db.VarChar
   nadkategorija_id Int?
-  kategorija       kategorija?  @relation("kategorijaTokategorija_nadkategorija_id", fields: [nadkategorija_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  kategorija       kategorija?  @relation("kategorijaTokategorija_nadkategorija_id", fields: [nadkategorija_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   other_kategorija kategorija[] @relation("kategorijaTokategorija_nadkategorija_id")
   oglas            oglas[]
 }
@@ -48,8 +48,8 @@ model kupovina {
   idoglas    Int
   idkorisnik Int
   id         Int      @default(autoincrement())
-  korisnik   korisnik @relation(fields: [idkorisnik], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  oglas      oglas    @relation(fields: [idoglas], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  korisnik   korisnik @relation(fields: [idkorisnik], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  oglas      oglas    @relation(fields: [idoglas], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@ignore
 }
@@ -58,7 +58,7 @@ model kupovina {
 model novcanik {
   stanje     Int
   idkorisnik Int
-  korisnik   korisnik @relation(fields: [idkorisnik], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "novčanik_idkorisnik_fkey")
+  korisnik   korisnik @relation(fields: [idkorisnik], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "novčanik_idkorisnik_fkey")
 
   @@ignore
 }
@@ -73,10 +73,10 @@ model oglas {
   idadresa     Int
   idkorisnik   Int
   idstatus     Int
-  adresa       adresa       @relation(fields: [idadresa], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  kategorija   kategorija   @relation(fields: [idkategorija], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  korisnik     korisnik     @relation(fields: [idkorisnik], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  status       status       @relation(fields: [idstatus], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  adresa       adresa       @relation(fields: [idadresa], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  kategorija   kategorija   @relation(fields: [idkategorija], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  korisnik     korisnik     @relation(fields: [idkorisnik], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  status       status       @relation(fields: [idstatus], references: [id], onDelete: Cascade, onUpdate: Cascade)
   kupovina     kupovina[]   @ignore
   slika        slika[]
   spremljeno   spremljeno[]
@@ -87,14 +87,14 @@ model slika {
   vrijednost String @db.VarChar
   naziv      String @db.VarChar
   idoglas    Int
-  oglas      oglas  @relation(fields: [idoglas], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  oglas      oglas  @relation(fields: [idoglas], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model spremljeno {
   idkorisnik Int
   idoglas    Int
-  korisnik   korisnik @relation(fields: [idkorisnik], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  oglas      oglas    @relation(fields: [idoglas], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  korisnik   korisnik @relation(fields: [idkorisnik], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  oglas      oglas    @relation(fields: [idoglas], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@id([idkorisnik, idoglas])
 }
