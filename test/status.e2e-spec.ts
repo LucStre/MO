@@ -14,6 +14,7 @@ describe('Category end to end', () => {
     app = moduleRef.createNestApplication();
     await app.init();
   });
+
   describe('Creating new status POST /api/status', () => {
     it(`should create new status`, () => {
       return request(app.getHttpServer())
@@ -21,7 +22,7 @@ describe('Category end to end', () => {
         .send({
           naziv: 'test status',
         })
-        .expect(200);
+        .expect(201);
     });
   });
 

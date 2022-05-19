@@ -6,7 +6,7 @@ import { INestApplication } from '@nestjs/common';
 
 describe('Category end to end', () => {
   let app: INestApplication;
-  const categoryService = { findAll: () => ['test'] };
+  const categoryService = { categories: () => ['test'] };
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -24,9 +24,7 @@ describe('Category end to end', () => {
     return request(app.getHttpServer())
       .get('/api/categories')
       .expect(200)
-      .expect({
-        data: categoryService.findAll(),
-      });
+      .expect(categoryService.categories());
   });
 
   afterAll(async () => {
