@@ -151,8 +151,6 @@ export class WebController {
   async createAd(@Body() oglasData: Prisma.oglasUncheckedCreateInput) {
     const { id, idkategorija, cijena, dostava, idstatus, ...rest } = oglasData;
 
-    console.log({ oglasData });
-
     if (id) {
       await this.adService.updateAd({
         where: { id: Number(id) },

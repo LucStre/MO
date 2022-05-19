@@ -20,7 +20,7 @@ export class AdController {
   }
 
   @Get()
-  async getCategories(): Promise<AdModel[]> {
+  async getAds(): Promise<AdModel[]> {
     return this.adService.ads({});
   }
 
