@@ -16,14 +16,14 @@ export class CategoryService {
     });
   }
 
-  async categories(params: {
+  async categories(params?: {
     skip?: number;
     take?: number;
     cursor?: Prisma.kategorijaWhereUniqueInput;
     where?: Prisma.kategorijaWhereInput;
     orderBy?: Prisma.kategorijaOrderByWithRelationInput;
   }): Promise<kategorija[]> {
-    const { skip, take, cursor, where, orderBy } = params;
+    const { skip, take, cursor, where, orderBy } = params || {};
     return this.prisma.kategorija.findMany({
       skip,
       take,
