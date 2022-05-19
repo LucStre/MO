@@ -8,9 +8,9 @@ import {
   Render,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { AdService } from 'src/ad/ad.service';
-import { CategoryService } from 'src/category/category.service';
-import { StatusService } from 'src/status/status.service';
+import { AdService } from '../ad/ad.service';
+import { CategoryService } from '../category/category.service';
+import { StatusService } from '../status/status.service';
 
 @Controller()
 export class WebController {
@@ -93,6 +93,7 @@ export class WebController {
   ) {
     let { kratica } = kategorijaData;
     const { id, ime, nadkategorija_id } = kategorijaData;
+
     if (id) {
       await this.categoryService.updateCategory({
         where: { id: Number(id) },

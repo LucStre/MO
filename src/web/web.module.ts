@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AdModule } from 'src/ad/ad.module';
-import { CategoryModule } from 'src/category/category.module';
-import { StatusModule } from 'src/status/status.module';
+import { AdModule } from '../ad/ad.module';
+import { CategoryModule } from '../category/category.module';
+import { StatusModule } from '../status/status.module';
 import { WebController } from './web.controller';
 
 @Module({
