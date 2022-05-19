@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 import { kategorija, Prisma } from '@prisma/client';
 
 @Injectable()
@@ -36,6 +36,9 @@ export class CategoryService {
   async createCategory(
     data: Prisma.kategorijaUncheckedCreateInput,
   ): Promise<kategorija> {
+    if (data.nadkategorija_id == 0) {
+      data.nadkategorija_id = null;
+    }
     return this.prisma.kategorija.create({
       data,
     });

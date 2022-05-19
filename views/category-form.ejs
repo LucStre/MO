@@ -24,7 +24,7 @@
           Nadkategorija
         </label>
         <select name="nadkategorija_id" id="nadkategorija_id" class="mt-1 rounded shadow block w-full px-3">
-          <option value="">Bez nadkategorije</option>
+          <option value="0">Bez nadkategorije</option>
           <% categories.forEach(function(category){ %>
             <option value="<%= category.id %>" <% if (locals.nadkategorija_id==category.id) { %>selected<% } %>>
                 <%= category.ime %>
