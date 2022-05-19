@@ -1,22 +1,25 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AdService } from './ad/ad.service';
+import { CategoryService } from './category/category.service';
+import { PrismaService } from './prisma.service';
+import { StatusService } from './status/status.service';
+import { WebController } from './web/web.controller';
 
 describe('AppController', () => {
-  let appController: AppController;
+  let appController: WebController;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
-      providers: [AppService],
+      controllers: [WebController],
+      providers: [CategoryService, PrismaService, StatusService, AdService],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
+    appController = app.get<WebController>(WebController);
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return home page', () => {
+      expect(appController.getHello()).toBe('Hello world!');
     });
   });
 });
